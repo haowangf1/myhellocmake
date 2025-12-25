@@ -1,0 +1,31 @@
+# @PROJECT_NAME@Config.cmake
+#
+# Package configuration file for @PROJECT_NAME@.
+#
+# This file is installed to:
+#   <prefix>/lib/cmake/@PROJECT_NAME@/@PROJECT_NAME@Config.cmake
+#
+# It loads the exported targets file installed alongside it:
+#   <prefix>/lib/cmake/@PROJECT_NAME@/@PROJECT_NAME@Targets.cmake
+
+include_guard(GLOBAL)
+
+# If this package had dependencies, you would typically do:
+#   include(CMakeFindDependencyMacro)
+#   find_dependency(SomeDep REQUIRED)
+
+include("${CMAKE_CURRENT_LIST_DIR}/@PROJECT_NAME@Targets.cmake")
+
+# Optional convenience variables
+set(@PROJECT_NAME@_VERSION "@PROJECT_VERSION@")
+
+if(TARGET @PROJECT_NAME@)
+  set(@PROJECT_NAME@_LIBRARIES @PROJECT_NAME@)
+  get_target_property(_@PROJECT_NAME@_inc @PROJECT_NAME@ INTERFACE_INCLUDE_DIRECTORIES)
+  if(_@PROJECT_NAME@_inc)
+    set(@PROJECT_NAME@_INCLUDE_DIRS "${_@PROJECT_NAME@_inc}")
+  endif()
+  unset(_@PROJECT_NAME@_inc)
+endif()
+
+
